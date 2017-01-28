@@ -23,7 +23,7 @@ public class face : MonoBehaviour
         chatScreen.gameObject.SetActive(false);
         pm = gameObject.GetComponent<PlayerManager>();
 	}
-	
+
 	// Update is called once per frame
 	void Update ()
     {
@@ -36,6 +36,7 @@ public class face : MonoBehaviour
             } else if(hit.transform.tag == "NPC" & Input.GetKeyDown(KeyCode.E))
             {
                 hit.transform.GetChild(0).LookAt(transform.parent);
+                hit.transform.GetChild(0).transform.rotation.x = 0f;
                 //transform.parent.gameObject.GetComponent<PlayerMovement>().canMove = false;
                 hit.transform.gameObject.GetComponent<NPC>().Chat(chatScreen.gameObject, textbox, pm.name, transform.parent.gameObject.GetComponent<PlayerMovement>());
                 //transform.parent.gameObject.GetComponent<PlayerMovement>().canMove = true;

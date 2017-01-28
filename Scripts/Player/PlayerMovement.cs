@@ -13,7 +13,7 @@ public class PlayerMovement : MonoBehaviour {
     {
         camera = camObj.GetComponent<Camera>();
     }
-	
+
 	// Update is called once per frame
 	void Update ()
     {
@@ -21,8 +21,8 @@ public class PlayerMovement : MonoBehaviour {
         {
             transform.Translate(new Vector3(Input.GetAxisRaw("Horizontal") * Time.deltaTime * speed, 0f, Input.GetAxisRaw("Vertical") * Time.deltaTime * speed));
             if (Input.GetAxisRaw("Horizontal") != 0f || Input.GetAxisRaw("Vertical") != 0f)
-                model.eulerAngles = new Vector3(0, Mathf.Atan2(Input.GetAxis("Vertical"), Input.GetAxis("Horizontal")) * -180 / Mathf.PI, 0);
+                model.eulerAngles = new Vector3(-90, Mathf.Atan2(Input.GetAxis("Vertical"), Input.GetAxis("Horizontal")) * -180 / Mathf.PI, 0);
         }
-        
+
     }
 }
