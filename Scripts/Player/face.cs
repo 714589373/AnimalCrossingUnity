@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-
 public class face : MonoBehaviour
 {
     RaycastHit hit;
@@ -28,18 +27,16 @@ public class face : MonoBehaviour
 	void Update ()
     {
         Debug.DrawRay(transform.position, transform.right, Color.red);
-        if (Physics.Raycast(transform.position, transform.right, out hit, 1f))
+        if (Physics.Raycast(transform.position, transform.right, out hit, 3f))
         {
             if(hit.transform.tag == "Door" & Input.GetKeyDown(KeyCode.E))
             {
                 transform.parent.transform.position = hit.transform.gameObject.GetComponent<doorAttributes>().destination;
             } else if(hit.transform.tag == "NPC" & Input.GetKeyDown(KeyCode.E))
             {
-                hit.transform.GetChild(0).LookAt(transform.parent);
-                hit.transform.GetChild(0).transform.rotation.x = 0f;
-                //transform.parent.gameObject.GetComponent<PlayerMovement>().canMove = false;
+                hit.transform.LookAt(transform.parent);
+                hit.transform.eulerAngles = new Vector3(0f, hit.transform.GetChild(0).transform.eulerAngles.y, hit.transform.GetChild(0).transform.eulerAngles.z);
                 hit.transform.gameObject.GetComponent<NPC>().Chat(chatScreen.gameObject, textbox, pm.name, transform.parent.gameObject.GetComponent<PlayerMovement>());
-                //transform.parent.gameObject.GetComponent<PlayerMovement>().canMove = true;
             }
         }
         if(Input.GetKeyDown(inventoryButton))
